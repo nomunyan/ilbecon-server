@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    restart: always
+    ports:
+      - 127.0.0.1:3000:3000
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_HOST: mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - 127.0.0.1:27017:27017
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:
